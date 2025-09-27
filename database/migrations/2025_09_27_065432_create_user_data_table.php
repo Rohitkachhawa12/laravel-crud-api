@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('user_data', function (Blueprint $table) {
             $table->id('user_data_id')->comment('Primary key: Unique ID of user');
-
             $table->string('name')->nullable()->comment('Full name of the user');
             $table->string('email')->unique()->comment('Email address of the user (required & unique)');
             $table->string('number')->nullable()->comment('Mobile number of the user');
