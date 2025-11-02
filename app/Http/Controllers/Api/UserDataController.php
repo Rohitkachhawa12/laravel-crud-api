@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\UserData;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class UserDataController extends Controller
 {
@@ -30,6 +31,8 @@ class UserDataController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request->all();
+        Log::error("Incoming login request", [$data]);
         try {
             $request->validate([
                 'full_name' => 'required|string|max:255',

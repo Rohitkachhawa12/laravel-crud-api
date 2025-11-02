@@ -3,22 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Laravel\Sanctum\HasApiTokens; // ✅ Add this
+use Illuminate\Foundation\Auth\User as Authenticatable; // ✅ extend Authenticatable for auth
+use Illuminate\Notifications\Notifiable;
 
-class UserData extends Model
+class UserData extends Authenticatable
 {
-    use HasFactory;
+    use HasApiTokens, Notifiable; // ✅ Use HasApiTokens here
 
-    // Table name
     protected $table = 'user_data';
+    protected $primaryKey = 'user_data_id'; 
+    protected $fillable = ['full_name','email','password','number','gender','state','city','created_by',
+    ];
 
-    // Primary key
-    protected $primaryKey = 'user_data_id';
-
-    // Fillable fields
-    protected $fillable = [  'full_name','email', 'number','gender','state', 'city', 'password', 'created_by'];
-
-    // Timestamps enabled (Laravel will handle created_at & updated_at automatically)
-    public $timestamps = true;
-
+    protected $hidden = [
+        'password',
+    ];
 }
