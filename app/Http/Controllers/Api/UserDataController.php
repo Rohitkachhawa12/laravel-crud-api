@@ -15,7 +15,20 @@ class UserDataController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            $users = UserData::orderBy('user_data_id', 'desc')->get();
+
+            return response()->json([
+                'success' => true,
+                'data' => $users
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**
